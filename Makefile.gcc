@@ -1,0 +1,203 @@
+# This is a completely generic makefile, which is nevertheless very powerful.
+# If you need a makefile for your project, this should be sufficient for most
+# of your needs.  It will not be able to handle complex build tasks such as
+# working a cross compiler or building yacc/bison based projects or whatnot
+# automatically, but can of course be extended for that purpose.  Currently,
+# it only supports C and C++ programs, though java could also be supported
+# at some point.
+#
+# This makefile requires GNU make.  Other make programs are probably not
+# powerful enough to handle this makefile.
+#
+# Originally created by Justin Husted <husted@cs>
+# Last modified by: $Author: strigeus $
+# On: $Date: 2004/03/11 19:15:06 $
+#
+# It should be able to do most everything you want automatically.
+# However, you will have to modify a few pieces of it and name your
+# files accordingly.
+#
+# Specifically:
+#    
+# For each program to be compiled, copy/modify the sample program block and add
+# in all the source files it will need.  Make will automatically be able to
+# figure out the dependencies for these source files and build them into object
+# files, and then sources, for you.
+#
+# This makefile is designed to support the following suffixes for your source
+# files:
+# 
+# For c programs: .c 
+# For c++ programs: .cc .C .cpp 
+#
+# It may also support some other suffixes built into GNU make by chance.
+
+##############################################################################
+#
+# !! User modifiable section starts here
+
+# Use the gcc compiler
+CC=gcc
+CPP=g++
+
+# When calling the compiler, use these flags
+# -g	debugging symbols
+# -Wall	all warnings
+# -s    automatic strip
+#
+# You may also want:
+# -O	optimize or -O2 fully optimize (O's above 2 are not recommended)
+# -pg	profile - generate profiling data.  See "man gprof" to use this.
+#
+# If you're building something like a gtk project, you may need to put
+# a line like `gtk-config --cflags` (with the backquotes) here.
+
+# Release mode
+#CFLAGS=-s -Wall -Wno-multichar `sdl-config --cflags` -O2 -fomit-frame-pointer -DUNIX -DWITH_SDL
+
+# Debug mode
+CFLAGS=-g -Wall -Wno-multichar `sdl-config --cflags` -DUNIX -DWITH_SDL -D_DEBUG
+
+if [ "$VENDOR" == "apple" ]; then
+LDFLAGS=-bundle_loader executable;
+
+# And use these flags when building to an executable, to link in the right
+# shared libraries
+# (default none) - if you need the math library, eg. for sqrt, use -lm
+#
+# If you're building something like a gtk project , you may need to put a
+# line like `gtk-config --libs` here.
+LIBS=`sdl-config --libs`
+
+
+# !! Change the next line to list all the programs you'd like to compile
+#    By default, make will build all of them.  If you just want a single
+#    program supported by the makefile, invoke make with, for example,
+#
+#    	make program1
+#
+#    If you just want to compile a single source file, invoke make with:
+#
+#    	make file.o
+
+all : ttd
+
+
+# !! The following are sample program block descriptions for a C program
+#    and a C++ program with .cc extensions.
+#
+# !! Change the following lines to describe your programs, and add more if
+#    necessary.  You have to list ALL the .c files (the sources in compiled
+#    form) that each program needs to build.  Eg, if program1 is built from
+#    2 source files, program1.c and shared.c, you need to list them both
+#    here.  There's no way make can find out which source files your program
+#    needs, since you might not have named the sources anything like the 
+#    executable, and might even have multiple source files that define the
+#    same function in different ways, or something!
+#    
+# !! You need to copy and modify the entire 3-line block for each program
+#    you want to build.  That is, you need to list all the source files, and
+#    then replace "program1_source" with "yourprogram_source" each place
+#    program1_source appears in the 3-line block.
+#
+# !! You do NOT need to list any .h files!  Since your source files 
+#    include .h files explicitly, this makefile is capable of determining
+#    which header files are used by program automatically, and will rebuild
+#    the parts of the program that use a header file automatically when the
+#    header file changes.  The dependencies for a source file are stored in
+#    the .d files which you will see created.
+
+# For a C program
+ttd_sources=			\
+	ai.c aircraft_cmd.c aircraft_gui.c airport_gui.c bridge_gui.c \
+	clear_cmd.c command.c disaster_cmd.c dock_gui.c dummy_land.c economy.c \
+	engine.c engine_gui.c extmidi.c fileio.c gfx.c graph_gui.c industry_cmd.c \
+	industry_gui.c intro_gui.c landscape.c main_gui.c misc.c misc_cmd.c \
+	misc_gui.c music_gui.c namegen.c network.c news_gui.c oldloader.c \
+	order_cmd.c order_gui.c pathfind.c player_gui.c players.c rail_cmd.c \
+	rail_gui.c road_cmd.c road_gui.c roadveh_cmd.c roadveh_gui.c saveload.c \
+	sdl.c settings_gui.c ship_cmd.c ship_gui.c smallmap_gui.c sound.c \
+	spritecache.c station_cmd.c station_gui.c strings.c subsidy_gui.c \
+	texteff.c town_cmd.c town_gui.c train_cmd.c train_gui.c tree_cmd.c \
+	ttd.c tunnelbridge_cmd.c unmovable_cmd.c vehicle.c viewport.c \
+	water_cmd.c widget.c window.c minilzo.c unix.c screenshot.c settings.c
+
+
+ttd : $(ttd_sources:.c=.o)
+	$(C_BUILD) $@ $^ ${LIBS}
+include $(ttd_sources:.c=.d)
+
+# !! Make sure the following line is correct for your project.  It should not
+#    remove important files!  You probably want to delete the executables
+#    when you clean, so as to make sure they get rebuilt after a clean
+clean :
+	rm -f *~ *.o core *.d table/strings.h lang/*.lng
+
+.PHONY : clean
+
+strgen/strgen: strgen/strgen.c
+	gcc -o strgen/strgen strgen/strgen.c
+
+table/strings.h: lang/english.txt strgen/strgen
+	strgen/strgen
+
+
+# Note that *~ deletes your editor backups.  If you want to keep those, don't
+# do that! 
+
+
+##############################################################################
+# 
+# Below this line are some somewhat more arcane makefile commands.  They're
+# fully commented, but you probably don't need to change them for simple
+# programs.
+#
+# They implement the "magic" of this makefile, that is, automatic dependency
+# scanning etc.
+
+# First, commands to invoke the compiler...
+# We call the OBJ_BUILD commands when building to an object (.o) file, and the
+# BUILD commands when building to an executable
+
+# C language
+C_OBJ_BUILD=$(CC) $(CFLAGS) -c
+C_BUILD=$(CC) $(CFLAGS) -o 
+
+# Now, implicit build rules for turning sources into object files
+# The $< is substituted for the .c file, in these rules.
+
+# C language
+%.o : %.c table/strings.h
+	$(C_OBJ_BUILD) $<
+
+# Now, for the tricky part.  Make knows how to create object files, but it doesn't
+# know WHEN to create them - for instance, what if a source file includes a .h file,
+# and the .h file changes?  Make needs to know that the object file depends on the
+# source file, and the header file too!
+
+# To accomplish this, we use the method recommended in the GNU make manual, which is
+# as follows: For each source file to be built into an object, we create an associated
+# dependency file (.d) which is just a piece of a makefile, in the following format:
+# file.o file.d : file.c header.h
+
+# The C/C++ compiler (assumed to be GCC!) is generally capable, given a source file,
+# of generating a makefile dependency line which looks like:
+#
+# file.o : file.c file.h ...
+#
+# The option to do this is -M, however, GCC also allows -MM, which only lists the
+# non-system headers, eg, the ones in your own project.  Basically, the rules
+# following just run the compiler in that mode on each of the source files,
+# and then do some sed trickery to reformat them into the:
+#
+# file.o file.d : file.c file.h ...
+#
+# format.  These command lines are taken from the make info pages.
+
+# A C source file
+%.d: %.c
+	set -e; \
+	$(CC) -MM $(CFLAGS) $< \
+	| sed 's#\($*\)\.o[ :]*#\1.o $@ : #g' > $@; \
+	[ -s $@ ] || rm -f $@ 
+

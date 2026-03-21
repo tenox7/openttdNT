@@ -1,0 +1,51 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: langs - Win32 Debug Alpha--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\TEMP\RSPA0.bat" with contents
+[
+@echo off
+strgen\debug\strgen.exe lang\swedish.txt
+]
+Creating command line "C:\TEMP\RSPA0.bat"
+Creating temporary file "C:\TEMP\RSPA1.bat" with contents
+[
+@echo off
+strgen\debug\strgen.exe lang\italian.txt
+]
+Creating command line "C:\TEMP\RSPA1.bat"
+Creating temporary file "C:\TEMP\RSPA2.bat" with contents
+[
+@echo off
+strgen\debug\strgen.exe lang\german.txt
+]
+Creating command line "C:\TEMP\RSPA2.bat"
+Creating temporary file "C:\TEMP\RSPA3.bat" with contents
+[
+@echo off
+strgen\debug\strgen.exe lang\french.txt
+]
+Creating command line "C:\TEMP\RSPA3.bat"
+Creating temporary file "C:\TEMP\RSPA4.bat" with contents
+[
+@echo off
+strgen\debug\strgen.exe
+]
+Creating command line "C:\TEMP\RSPA4.bat"
+<h3>Output Window</h3>
+Performing Custom Build Step on .\lang\swedish.txt
+The name specified is not recognized as an
+internal or external command, operable program or batch file.
+Error executing c:\winnt\system32\cmd.exe.
+
+
+
+<h3>Results</h3>
+langs - 1 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

@@ -1,0 +1,6 @@
+##name Swedish
+##ownname Svenska
+
+STR_0001_OFF_EDGE_OF_MAP				:{WHITE}Utanför kanten
+STR_0007_FLAT_LAND_REQUIRED				:{WHITE}Platt mark krävs
+STR_AUTOSAVE_1_MONTH					:Varje månad

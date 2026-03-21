@@ -1,0 +1,138 @@
+0.2
+
+- Feature: autoscroll (only works to left/right)
+- Feature: train checkpoints, instead of ttdpatch's nonstop handling
+- Feature: ttdpatch compatible nonstop handling
+- Fix: news window was moved strangely when resizing
+- Fix: fixed sign drawing bug in max zoom out mode
+- Feature: refresh rate configuration setting
+- Feature: town directory sorting options
+- Feature: pre-signals (ctrl-click on existing signals to change signal type)
+- Feature: show semaphores on the right side if right-sided traffic
+- Improvement: increased number of windows on screen to 20
+- Feature: patch options configuration window
+- Fix: road vehicles sometimes getting stuck
+- Feature: autorail build tool
+- Feature: "show yearly finances window" option
+- Feature: "signals on drive side" patch (by Michael Polnick)
+- Fix: connecting tracks behind depot causing incorrect signal behavior
+- Fix: save/load diskspace bug
+- Feature: "show full date in statusbar" option
+- Feature: italian translation (by duepixel)
+- Feature: road and rail removal by dragging a selection
+- Feature: news item for "train is unprofitable"
+- Feature: news item for "train is lost"
+- Feature: (win32 build) double size mode (ctrl-d to toggle)
+- Fix: incorrect bridge cost for long bridges
+- Feature: "multiple similar industries in close proximity" option
+- Feature: "multiple industries per down" option
+- Feature: "crossing tunnels" option
+- Feature: order sharing and copying ("goto" on other vehicle to copy, ctrl+"goto" to share)
+- Feature: remember last built rail type
+- Feature: "debtmax" faster loan management with ctrl key
+- Fix: disallow buoy in north corner
+- Feature: "go to depot" orders option
+- Feature: "long bridges" option
+- Feature: "select goods" option
+- Feature: "no train service" option
+- Feature: "no inflation" option
+- Improvement: (OSX build) now starts when doubleclicked
+- Improvement: (OSX build) significant performance increase
+- Improvement: optimized startup time
+- Feature: automatically detect available resolutions
+- Feature: "full load any" option, as in ttdpatch
+- Feature: automatic detection of available language files
+- Feature: German translation (by truesatan and wuntvor)
+- Improvement: sorted savegame list
+- Feature: finnish town names (by Jpl)
+- Feature: remember custom difficulty settings
+- Fix: shift key now increases game speed only when game window is active
+- Fix: ctrl button now works with SDL driver
+- Feature: configuration file system
+- Feature: show vehicle speed in vehicle view windows
+- Fix: incorrect weight displayed in "new trains" window
+- Feature: train depot window now has horizontal scrollbar
+- Feature: mammoth trains
+- Fix: incorrect train running cost in newspaper
+- Feature: on-the-fly language selection
+- Feature: load old premade ttd maps (must be renamed to .sv1 extension)
+
+0.1.4
+
+- Feature: crash submit system on win32
+- Fix: train smoke clouds
+- Fix: train engine sounds
+- Fix: play all sounds at 11025 hz (fixes certain sounds)
+- Feature: autosave
+- Fix: scenario editor desert button now makes desert instead of lighthouse
+- Fix: creating random town in scenario editor crash
+- Fix: candy bubbles sometimes caused crash
+- Fix: wrong speed was shown in news window for some vehicles
+- Fix: graph color bleeding
+- Feature: build on coasts
+- Feature: Allow building transmitters, lighthouses and company headquarters on slopes
+- Feature: now builds on MacOSX
+- Fix: arrow keys with SDL driver
+- Change: new savegame format
+- Change: new format for english.lng
+- Fix: don't allow trains to road depots
+- Fix: road vehicle was sometimes shown inside depot
+- Fix: arrow keys in sdl driver were wrong
+- Fix: endianness bugs in save/load
+- Fix: now builds on FreeBSD
+- Fix: screenshot feature now works
+- Fix: rail foundations sometimes displayed unnecessarily
+- Fix: minor AI bugs
+- Fix: fixed industry sounds
+- Feature: in-game resolution selection via settings window
+- Feature: Dutch town names
+- Feature: Added load game menu item
+- Fix: bug where ship depots were very expensive
+- Fix: BeOS build (by MYOB)
+- Fix: yearly expenses data being the same for the past two game years
+- Fix: adding songs to playlists other than custom1 and custom2
+- Fix: first and last tracks playing the wrong music
+- Fix: Palette animation for SDL video (rob)
+- Fix: Get remaining disk space on most Unix-en (rob)
+- Fix: screen went black when resizing
+
+0.1.3
+
+- Fixed message options window
+- Fixed company takeover/purchase
+- Feature: Improved mouse scroll zooming
+- Fixed station code so it's not possible to steal another player's temporarily deleted station
+- Fixed subsidy owner bug when deleting station
+- Fixed crash when deleting a bridge with a train on it
+- Feature: Larger stations and possibility to join stations
+- Fixed missing candy initial cargo payment values
+- Fixed Goods and Food/FizzyDrinks subsidies
+- Fixed graphical glitch in subsidies window
+- Take over company dialog was not shown properly
+- Fixed crash if player windows were open while the company went bankrupt
+- Fixed train slowness on hills
+- Feature: swedish town names (patch by glottis)
+- Feature: more currencies
+- Better window resizing/zooming
+- Added goto road vehicle depot for road vehicle orders
+- Possibility to use either semaphores or signals (Ctrl key)
+- Limited the scrolling rate for year selector in scenario editor
+
+0.1.2
+
+- Mouse wheel can be used to zoom in out on win32 (ludde)
+- Implemented some support for resizing the window dynamically in win32 (ludde)
+- Fixed tunnel mouse icon for maglev and monorail
+
+0.1.1
+
+- Preliminary presignal support
+- Added external MIDI driver for unix version (by robertnorris)
+- Added DirectMusic driver for Win32 version
+- Fixed problem where directories weren't displayed under Linux (by Markus)
+- Center windows properly in higher resolutions
+- Added "build tracks on slopes" feature
+- Fixed colors in map window for routes
+- Command line -g flag now optionally takes a game to load
+- Fixed road drive side
+- Fixed "Fund road construction" not clickable when unavailable

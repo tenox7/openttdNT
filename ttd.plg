@@ -1,0 +1,105 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: ttd - Win32 Release Alpha--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\TEMP\RSP53.tmp" with contents
+[
+/nologo /ML /Gt0 /W3 /Gm /GX /Zi /O2 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /FAcs /Fa"ttd___Win32_Release_Alpha/" /FR"ttd___Win32_Release_Alpha/" /Fp"ttd___Win32_Release_Alpha/ttd.pch" /Yu"stdafx.h" /Fo"ttd___Win32_Release_Alpha/" /Fd"ttd___Win32_Release_Alpha/" /J /FD /c 
+"D:\dev\src\Copy of openttd-0.2.0_AXP_nosound_20230906\win32.c"
+]
+Creating command line "cl.exe @C:\TEMP\RSP53.tmp" 
+Creating temporary file "C:\TEMP\RSP54.tmp" with contents
+[
+winmm.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib /nologo /subsystem:windows /incremental:no /pdb:"ttd___Win32_Release_Alpha/ttd.pdb" /map:"ttd___Win32_Release_Alpha/ttd.map" /machine:ALPHA /out:"ttd___Win32_Release_Alpha/ttd.exe" /opt:nowin98 
+".\ttd___Win32_Release_Alpha\ai.obj"
+".\ttd___Win32_Release_Alpha\command.obj"
+".\ttd___Win32_Release_Alpha\economy.obj"
+".\ttd___Win32_Release_Alpha\engine.obj"
+".\ttd___Win32_Release_Alpha\fileio.obj"
+".\ttd___Win32_Release_Alpha\gfx.obj"
+".\ttd___Win32_Release_Alpha\landscape.obj"
+".\ttd___Win32_Release_Alpha\minilzo.obj"
+".\ttd___Win32_Release_Alpha\misc.obj"
+".\ttd___Win32_Release_Alpha\namegen.obj"
+".\ttd___Win32_Release_Alpha\network.obj"
+".\ttd___Win32_Release_Alpha\oldloader.obj"
+".\ttd___Win32_Release_Alpha\pathfind.obj"
+".\ttd___Win32_Release_Alpha\players.obj"
+".\ttd___Win32_Release_Alpha\saveload.obj"
+".\ttd___Win32_Release_Alpha\screenshot.obj"
+".\ttd___Win32_Release_Alpha\sdl.obj"
+".\ttd___Win32_Release_Alpha\settings.obj"
+".\ttd___Win32_Release_Alpha\sound.obj"
+".\ttd___Win32_Release_Alpha\spritecache.obj"
+".\ttd___Win32_Release_Alpha\StdAfx.obj"
+".\ttd___Win32_Release_Alpha\strings.obj"
+".\ttd___Win32_Release_Alpha\texteff.obj"
+".\ttd___Win32_Release_Alpha\ttd.obj"
+".\ttd___Win32_Release_Alpha\vehicle.obj"
+".\ttd___Win32_Release_Alpha\viewport.obj"
+".\ttd___Win32_Release_Alpha\w32dm.obj"
+".\ttd___Win32_Release_Alpha\w32dm2.obj"
+".\ttd___Win32_Release_Alpha\widget.obj"
+".\ttd___Win32_Release_Alpha\win32.obj"
+".\ttd___Win32_Release_Alpha\window.obj"
+".\ttd___Win32_Release_Alpha\aircraft_gui.obj"
+".\ttd___Win32_Release_Alpha\airport_gui.obj"
+".\ttd___Win32_Release_Alpha\bridge_gui.obj"
+".\ttd___Win32_Release_Alpha\dock_gui.obj"
+".\ttd___Win32_Release_Alpha\engine_gui.obj"
+".\ttd___Win32_Release_Alpha\graph_gui.obj"
+".\ttd___Win32_Release_Alpha\industry_gui.obj"
+".\ttd___Win32_Release_Alpha\intro_gui.obj"
+".\ttd___Win32_Release_Alpha\main_gui.obj"
+".\ttd___Win32_Release_Alpha\misc_gui.obj"
+".\ttd___Win32_Release_Alpha\music_gui.obj"
+".\ttd___Win32_Release_Alpha\news_gui.obj"
+".\ttd___Win32_Release_Alpha\order_gui.obj"
+".\ttd___Win32_Release_Alpha\player_gui.obj"
+".\ttd___Win32_Release_Alpha\rail_gui.obj"
+".\ttd___Win32_Release_Alpha\road_gui.obj"
+".\ttd___Win32_Release_Alpha\roadveh_gui.obj"
+".\ttd___Win32_Release_Alpha\settings_gui.obj"
+".\ttd___Win32_Release_Alpha\ship_gui.obj"
+".\ttd___Win32_Release_Alpha\smallmap_gui.obj"
+".\ttd___Win32_Release_Alpha\station_gui.obj"
+".\ttd___Win32_Release_Alpha\subsidy_gui.obj"
+".\ttd___Win32_Release_Alpha\town_gui.obj"
+".\ttd___Win32_Release_Alpha\train_gui.obj"
+".\ttd___Win32_Release_Alpha\aircraft_cmd.obj"
+".\ttd___Win32_Release_Alpha\clear_cmd.obj"
+".\ttd___Win32_Release_Alpha\disaster_cmd.obj"
+".\ttd___Win32_Release_Alpha\dummy_land.obj"
+".\ttd___Win32_Release_Alpha\industry_cmd.obj"
+".\ttd___Win32_Release_Alpha\misc_cmd.obj"
+".\ttd___Win32_Release_Alpha\order_cmd.obj"
+".\ttd___Win32_Release_Alpha\rail_cmd.obj"
+".\ttd___Win32_Release_Alpha\road_cmd.obj"
+".\ttd___Win32_Release_Alpha\roadveh_cmd.obj"
+".\ttd___Win32_Release_Alpha\ship_cmd.obj"
+".\ttd___Win32_Release_Alpha\station_cmd.obj"
+".\ttd___Win32_Release_Alpha\town_cmd.obj"
+".\ttd___Win32_Release_Alpha\train_cmd.obj"
+".\ttd___Win32_Release_Alpha\tree_cmd.obj"
+".\ttd___Win32_Release_Alpha\tunnelbridge_cmd.obj"
+".\ttd___Win32_Release_Alpha\unmovable_cmd.obj"
+".\ttd___Win32_Release_Alpha\water_cmd.obj"
+".\ttd___Win32_Release_Alpha\ttd.res"
+]
+Creating command line "link.exe @C:\TEMP\RSP54.tmp"
+<h3>Output Window</h3>
+Compiling...
+win32.c
+Linking...
+
+
+
+<h3>Results</h3>
+ttd.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

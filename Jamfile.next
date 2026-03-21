@@ -1,0 +1,88 @@
+SDL_CONFIG_CFLAGS = `XX_SDL_CONFIG_PLACEHOLDER_XX --cflags` ;
+SDL_CONFIG_LIBS = `XX_SDL_CONFIG_PLACEHOLDER_XX --libs` ;
+
+LINKFLAGS += $(SDL_CONFIG_LIBS) ;
+
+# Use gcc instead of cc
+if $(UNIX) {
+	CC = gcc ;
+	CCFLAGS += -Wall -Wno-multichar -DUNIX -DWITH_SDL ;
+}
+
+rule MyObjects
+{
+	local _i _t _s ;
+
+	_t = $(OUTDIR)/$(>:S=$(SUFOBJ)) ;
+	OPTIM on $(_t) = $(3) ;
+	
+	MkDir $(OUTDIR) ;
+	Depends $(_t) : $(OUTDIR) ;
+
+	for _i in $(>) 
+	{
+		_s = $(OUTDIR)/$(_i:S=$(SUFOBJ)) ;
+		Object $(_s) : $(_i) ;
+
+# special handling for sdl.c
+		if $(_i) = sdl.c || $(_i) = unix.c { CCFLAGS on $(_s) += $(SDL_CONFIG_CFLAGS) ; }
+	}
+	MainFromObjects $(OUTDIR)/$(<) : $(_t) ;
+}
+
+rule MyMain 
+{
+#	OUTDIR = release ;
+#	MyObjects ttd : $(>) : -O2 -fomit-frame-pointer ;
+
+	OUTDIR = debug ;
+	MyObjects ttd : $(>) : -g ;
+}
+
+actions CompileLang
+{
+	strgen/strgen $(>)
+}
+
+rule LangFile
+{
+	if $(>) = lang/english.txt {
+		CompileLang $(<) table/strings.h : ;
+		DEPENDS table/string.h : $(>) ;
+	} else {
+		CompileLang $(<) : $(>) ;
+	}
+	
+	Clean clean : $(<) ;
+	DEPENDS $(<) : $(>) ;
+	DEPENDS all : $(<) ;
+	DEPENDS $(<) : strgen/strgen ;
+}
+
+rule LangFiles
+{
+	local _i ;
+	for _i in $(<) { LangFile $(_i:S=.lng) : $(_i) ; }
+}
+
+LangFiles lang/english.txt lang/swedish.txt lang/french.txt lang/german.txt ;
+
+Main strgen/strgen : strgen/strgen.c ;
+
+MyMain ttd :
+	ai.c aircraft_cmd.c aircraft_gui.c airport_gui.c
+	bridge_gui.c clear_cmd.c command.c disaster_cmd.c
+	dock_gui.c dummy_land.c extmidi.c economy.c engine.c engine_gui.c
+	fileio.c gfx.c graph_gui.c industry_cmd.c industry_gui.c
+	intro_gui.c landscape.c main_gui.c minilzo.c misc.c
+	misc_cmd.c misc_gui.c music_gui.c namegen.c network.c
+	news_gui.c oldloader.c order_cmd.c order_gui.c pathfind.c
+	player_gui.c players.c rail_cmd.c rail_gui.c road_cmd.c
+	road_gui.c roadveh_cmd.c roadveh_gui.c saveload.c sdl.c
+	settings.c settings_gui.c ship_cmd.c ship_gui.c smallmap_gui.c
+	sound.c spritecache.c station_cmd.c station_gui.c
+	strings.c subsidy_gui.c texteff.c town_cmd.c town_gui.c
+	train_cmd.c train_gui.c tree_cmd.c ttd.c
+	tunnelbridge_cmd.c unix.c unmovable_cmd.c vehicle.c
+	viewport.c water_cmd.c widget.c window.c screenshot.c ;
+
