@@ -318,6 +318,8 @@ static LRESULT CALLBACK WndProcGdi(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		}
 		return 0;
 	}
+#ifdef WM_SIZING
+	/* NT 3.5 (PINT 3.5) sends no WM_SIZING: its window sizes freely */
 	case WM_SIZING: {
 		RECT* r = (RECT*)lParam;
 		RECT r2;
@@ -370,6 +372,7 @@ static LRESULT CALLBACK WndProcGdi(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 		}
 		return TRUE;
 	}
+#endif
 
 // needed for wheel
 #if !defined(WM_MOUSEWHEEL)
@@ -432,6 +435,7 @@ static void MakeWindow(bool full_screen)
 	}
 	
 	if (full_screen) {
+#ifdef CDS_FULLSCREEN
 		DEVMODE settings;
 		memset(&settings, 0, sizeof(DEVMODE));
 		settings.dmSize = sizeof(DEVMODE);
@@ -446,9 +450,16 @@ static void MakeWindow(bool full_screen)
 			MakeWindow(false);
 			return;
 		}
+#else
+		/* NT 3.5 (PINT 3.5) changes no display modes: a window, as when the change fails */
+		MakeWindow(false);
+		return;
+#endif
 	} else if (_wnd.fullscreen) {
 		// restore display?
+#ifdef CDS_FULLSCREEN
 		ChangeDisplaySettings(NULL, 0);
+#endif
 	}
 
 	{
@@ -547,6 +558,8 @@ static void FindResolutions()
 	int i = 0, n = 0;
 	DEVMODE dm;
 
+#ifdef CDS_FULLSCREEN
+	/* NT 3.5 (PINT 3.5) lists no display modes: the default resolutions below */
 	while (EnumDisplaySettings(NULL, i++, &dm)) {
 		if (dm.dmBitsPerPel == 8 && 
 				IS_INT_INSIDE(dm.dmPelsWidth, 640, MAX_SCREEN_WIDTH+1) &&
@@ -557,6 +570,7 @@ static void FindResolutions()
 			if (++n == sizeof(_resolutions) / (sizeof(uint16)*2)) break;
 		}
 	}
+#endif
 
 	if (n == 0) {
 		memcpy(_resolutions, default_resolutions, sizeof(default_resolutions));
@@ -593,7 +607,9 @@ static char *Win32GdiStart(char **parm)
 static void Win32GdiStop()
 {
 	if ( _wnd.fullscreen ) {
+#ifdef CDS_FULLSCREEN
 		ChangeDisplaySettings(NULL, 0);
+#endif
 	}
 	MyShowCursor(true);
 	DeleteObject(_wnd.gdi_palette);
